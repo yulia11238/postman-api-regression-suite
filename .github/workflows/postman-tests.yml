@@ -16,7 +16,7 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
 
       - name: Build Mockoon Docker image
-        run: docker build -t mockoon-server .
+        run: docker build -t mockoon-server ./mock-server
 
       - name: Start Mockoon mock server
         run: docker run -d -p 3000:3000 mockoon-server
