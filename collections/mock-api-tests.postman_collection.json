@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "0ceb7e38-b520-4e8a-98bf-dc2c9a53606c",
+		"name": "mock-api-tests",
+		"description": "StartFragmentAPI regression test suite for users, orders, and products endpoints.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45055893",
+		"_collection_link": "https://yuliia-417084.postman.co/workspace/35eab189-5c7e-4f4c-89d9-bd6605f9cb89/collection/45055893-0ceb7e38-b520-4e8a-98bf-dc2c9a53606c?action=share&source=collection_link&creator=45055893"
+	},
+	"item": [
+		{
+			"name": "users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is an array of 10 users\", () => {\r",
+							"  const users = pm.response.json();\r",
+							"  pm.expect(users).to.be.an(\"array\").with.lengthOf(10);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Each user has expected fields\", () => {\r",
+							"  const users = pm.response.json();\r",
+							"  users.forEach(user => {\r",
+							"    pm.expect(user).to.have.all.keys(\"id\", \"name\", \"email\", \"phone\", \"address\", \"birthdate\", \"isActive\");\r",
+							"    pm.expect(user.id).to.be.a(\"string\");\r",
+							"    pm.expect(user.name).to.be.a(\"string\");\r",
+							"    pm.expect(user.email).to.be.a(\"string\");\r",
+							"    pm.expect(user.phone).to.be.a(\"string\");\r",
+							"    pm.expect(user.address).to.be.a(\"string\");\r",
+							"    pm.expect(user.birthdate).to.be.a(\"string\");\r",
+							"    pm.expect(user.isActive).to.be.a(\"boolean\");\r",
+							"  });\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/users",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is an array of 10 products\", () => {\r",
+							"  const products = pm.response.json();\r",
+							"  pm.expect(products).to.be.an(\"array\").with.lengthOf(10);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Each product has expected fields\", () => {\r",
+							"  const products = pm.response.json();\r",
+							"  products.forEach(product => {\r",
+							"    pm.expect(product).to.have.all.keys(\"id\", \"name\", \"description\", \"price\", \"category\", \"inStock\", \"rating\", \"createdAt\");\r",
+							"    pm.expect(product.id).to.be.a(\"string\");\r",
+							"    pm.expect(product.name).to.be.a(\"string\");\r",
+							"    pm.expect(product.description).to.be.a(\"string\");\r",
+							"    pm.expect(product.price).to.be.a(\"number\");\r",
+							"    pm.expect(product.category).to.be.a(\"string\");\r",
+							"    pm.expect(product.inStock).to.be.a(\"boolean\");\r",
+							"    pm.expect(product.rating).to.be.a(\"number\");\r",
+							"    pm.expect(product.createdAt).to.be.a(\"string\");\r",
+							"  });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/products",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "orders",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is an array of 10 orders\", () => {\r",
+							"  const orders = pm.response.json();\r",
+							"  pm.expect(orders).to.be.an(\"array\").with.lengthOf(10);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Each order has expected fields\", () => {\r",
+							"  const orders = pm.response.json();\r",
+							"  orders.forEach(order => {\r",
+							"    pm.expect(order).to.have.all.keys(\"id\", \"customerName\", \"customerEmail\", \"orderDate\", \"totalAmount\", \"isShipped\");\r",
+							"    pm.expect(order.id).to.be.a(\"string\");\r",
+							"    pm.expect(order.customerName).to.be.a(\"string\");\r",
+							"    pm.expect(order.customerEmail).to.be.a(\"string\");\r",
+							"    pm.expect(order.orderDate).to.be.a(\"string\");\r",
+							"    pm.expect(order.totalAmount).to.be.a(\"number\");\r",
+							"    pm.expect(order.isShipped).to.be.a(\"boolean\");\r",
+							"  });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": \"1\",\r\n  \"productIds\": [1, 2]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/orders",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

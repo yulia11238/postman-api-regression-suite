@@ -1,0 +1,29 @@
+name: Automated API tests using Postman CLI
+
+on: push
+
+jobs:
+  automated-api-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Postman CLI
+        run: |
+          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+
+      - name: Login to Postman CLI
+        run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
+
+      - name: Build Mockoon Docker image
+        run: docker build -t mockoon-server ./mock-server
+
+      - name: Start Mockoon mock server
+        run: docker run -d -p 3000:3000 mockoon-server
+
+      - name: Wait for mock server to be ready
+        run: sleep 5
+
+      - name: Run API tests
+        run: |
+          postman collection run "45055893-0ceb7e38-b520-4e8a-98bf-dc2c9a53606c" -e "45055893-0083c890-0ad5-4d3c-b2d0-a715abd5af33"
